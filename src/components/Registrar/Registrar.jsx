@@ -4,6 +4,11 @@ import { Typography } from 'antd';
 import 'antd/dist/antd.css';
 import 'moment/locale/es';
 import locale from 'antd/es/date-picker/locale/es_ES';
+import Cookies from 'universal-cookie';
+import axios from 'axios';
+
+const baseUrl="http://localhost:8085/api/ussers/";
+const cookies = new Cookies();
 
 const {Item} = Form;
 const {Password} = Input;
@@ -19,6 +24,18 @@ function Registrar(){
 
   const formSuccess=(datos)=>{
     console.log('Formulario enviado exitosamente: ',datos);
+    axios({
+      method: 'post', 
+      url: baseUrl,
+      data: {
+        "firstName":datos.firstName,
+        "lastName":datos.lastName,
+        "usserName":datos.usserName,
+        "password":datos.password,
+        "email":datos.email,
+        "phone":datos.selectCodigo + datos.phone
+      }
+    })
   }
   
   const formFailed=(error)=>{
@@ -32,11 +49,11 @@ function Registrar(){
   const prefixSelector=(
     <Item name='selectCodigo' noStyle>
       <Select style={{width: 80}} defaultValue='54'>
-        <Option value='52'>+52</Option>
-        <Option value='53'>+53</Option>
-        <Option value='54'>+54</Option>
-        <Option value='55'>+55</Option>
-        <Option value='56'>+56</Option>
+        <Option value='+52'>+52</Option>
+        <Option value='+53'>+53</Option>
+        <Option value='+54'>+54</Option>
+        <Option value='+55'>+55</Option>
+        <Option value='+56'>+56</Option>
       </Select>
     </Item>
   );
@@ -75,19 +92,19 @@ function Registrar(){
           <Form name='formulario' initialValues={{recordar: true}}onFinish={formSuccess}onFinishFailed={formFailed}ref={formRef}{...formItemLayout}>
             <Title style={{color:'slategrey',textAlign:'center', textSizeAdjust:'auto'}}>Complete los siguientes datos para la Registración</Title>
             
-            <Item label='Nombre' name='nombre' rules={[{required: true, message: 'Por favor ingrese el Nombre'}]}><Input /*onChange={this.handleChange}*//></Item>
-            <Item label='Apellido' name='apellido' rules={[{required: true, message: 'Por favor ingrese el Apellido'}]}><Input /*onChange={this.handleChange}*//></Item>
-            <Item label='Usuario' name='username' rules={[{required: true, message: 'Por favor ingrese el nombre de Usuario'}]}><Input /*onChange={this.handleChange}*//></Item>
+            <Item label='Nombre' name='firstName' rules={[{required: true, message: 'Por favor ingrese el Nombre'}]}><Input /*onChange={this.handleChange}*//></Item>
+            <Item label='Apellido' name='lastName' rules={[{required: true, message: 'Por favor ingrese el Apellido'}]}><Input /*onChange={this.handleChange}*//></Item>
+            <Item label='Usuario' name='usserName' rules={[{required: true, message: 'Por favor ingrese el nombre de Usuario'}]}><Input /*onChange={this.handleChange}*//></Item>
             <Item label='Contraseña' name='password' rules={[{required: true, message: 'Por favor ingrese la Contraseña'}]}><Password /*onChange={this.handleChange}*//></Item>
-            <Item label='Correo' name='correo' rules={[{required: true, message: 'Por favor ingrese el Correo'}]}><Input /*onChange={this.handleChange}*//></Item>
-            <Item label='Sexo' name='sexo' rules={[{required: true, message: 'Por favor ingrese el Correo'}]}>
+            <Item label='Correo' name='email' rules={[{required: true, message: 'Por favor ingrese el Correo'}]}><Input /*onChange={this.handleChange}*//></Item>
+            {/*<Item label='Sexo' name='sexo' rules={[{required: true, message: 'Por favor ingrese el Correo'}]}>
               <Group onChange={onChange} value={value} name='radiobutton' defaultValue={1}>
                 <Radio value={1}>Hombre</Radio>
                 <Radio value={2}>Mujer</Radio>
               </Group>
             </Item>
-            <Item label='Fecha de Nacimiento' name='fechaNacimiento' rules={[{required: true, message: 'Por favor ingrese la Fecha de Nacimiento'}]}><DatePicker style={{width: '100%'}} locale={locale}/></Item>
-            <Item label='Número de Teléfono' name='numeroTelefono'><Input addonBefore={prefixSelector} style={{width: '100%'}} maxLength={10}/* onChange={this.handleChange}*//></Item>
+  <Item label='Fecha de Nacimiento' name='fechaNacimiento' rules={[{required: true, message: 'Por favor ingrese la Fecha de Nacimiento'}]}><DatePicker style={{width: '100%'}} locale={locale}/></Item>*/}
+            <Item label='Número de Teléfono' name='phone'><Input addonBefore={prefixSelector} style={{width: '100%'}} maxLength={10}/></Item>
 
             <Item style={{textAlign: 'center'}}>
               <Button type='primary' htmlType='submit'>Registrar Usuario</Button>
