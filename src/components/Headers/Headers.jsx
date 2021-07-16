@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
+import banner from '../../images/banner_header.jpg'
 
 const style = {
   color:'grey',
@@ -12,7 +13,7 @@ const Header = (props) => {
       <nav>
         <ul>
           <li>
-            <Link to='/'> <img href='https://http2.mlstatic.com/D_NQ_NP_2X_684964-MLA44135654663_112020-F' alt="logo" /> </Link>
+            <Link to='/'> <img src={banner} alt="logo" /> </Link>
           </li>
           <li>
             <NavLink to='/publications' activeStyle={style}>Publications</NavLink>

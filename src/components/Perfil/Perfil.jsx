@@ -6,6 +6,7 @@ import 'antd/dist/antd.css';
 import 'moment/locale/es';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
+import { Popconfirm, message } from 'antd';
 
 const baseUrl="http://localhost:8085/api/ussers/";
 const cookies = new Cookies();
@@ -99,6 +100,39 @@ function grabar(){
     console.log('Error: ',error)
   }
 
+  const confirm = async () => {
+    let datosUsuarios = await axios.get(baseUrl, {params: {usserName: cookies.get('usserName'), password: cookies.get('password')}})
+
+    console.log('datos traidos del usuario: ', datosUsuarios)
+
+    let baseAxios2 = await baseUrl + datosUsuarios.data[0]._id
+
+    console.log('pulso OK', baseAxios2);
+
+    cookies.remove('id', {path: '/'});
+    cookies.remove('firstName', {path: '/'});
+    cookies.remove('lastName', {path: '/'});
+    cookies.remove('usserName', {path: '/'});
+    cookies.remove('password', {path: '/'});
+    cookies.remove('email', {path: '/'});
+    /*cookies.remove('sexo', {path: '/'});
+    cookies.remove('dateNac', {path: '/'});*/
+    cookies.remove('address', {path: '/'});
+    cookies.remove('phone', {path: '/'});
+    
+    
+
+    axios.delete(baseAxios2)
+    window.location.href='./';
+    await message.success('Borrado con Éxito');
+  }
+
+  const cancel = () => {
+    console.log('Cancelado con Éxito');
+  }
+
+
+
   const prefixSelector=(
     <Item id="campoInput" name='selectCodigo' noStyle>
       <Select style={{width: 80}} defaultValue='+54' disabled>
@@ -140,7 +174,7 @@ function grabar(){
         <Col xs={22} sm={20} md={12} lg={10}>
 
           <Form name='formulario' onFinish={formSuccess}onFinishFailed={formFailed}ref={formRef}{...formItemLayout}>
-            <Title style={{color:'slategrey',textAlign:'center', textSizeAdjust:'auto'}}>Datos de Usuario</Title>
+            <Title style={{color:'black',textAlign:'center', textSizeAdjust:'auto'}}>Datos de Usuario</Title>
             
             <Item  label='Nombre' name='firstName'  ><Input  defaultValue={cookies.get('firstName')} /></Item>
             <Item label='Apellido' name='lastName' ><Input  defaultValue={cookies.get('lastName')} /></Item>
@@ -153,6 +187,15 @@ function grabar(){
               <Button htmlType='submit' onClick={activarGrabado}>Aceptar Cambios</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <Button id="ocultar" type='primary' htmlType='submit' icon={<SaveFilled/>} disabled>Grabar</Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {/*<button id="ocultar" type='primary' htmlType='submit' icon={<SaveFilled/>} disabled>Borrar Usuario</button>*/}
+              <button>
+                <Popconfirm title="Estas seguro de borrar el Usuario？" onConfirm={confirm} onCancel={cancel} okText="Si" cancelText="Cancelar">
+                  <a href="#">Borrar Usuario</a>
+                </Popconfirm>
+              </button>
+              
+
             </Item>
 
           </Form>

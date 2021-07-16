@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import {NavLink} from 'react-router-dom';
+import './Login.css'
 
 const {Item} = Form;
 const {Password} = Input;

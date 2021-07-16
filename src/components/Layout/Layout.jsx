@@ -3,6 +3,7 @@ import { Layout, Menu/*, Breadcrumb */} from 'antd';
 import {
   PicRightOutlined,
   UserOutlined,
+  AppstoreAddOutlined,
 } from '@ant-design/icons';
 import {NavLink} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
@@ -13,8 +14,10 @@ import Cookies from 'universal-cookie';
 import { Avatar } from 'antd';
 import Perfil from '../Perfil/Perfil';
 import PublicSelect from '../Publications/PublicSelect';
+import AddNewPublic from '../Publications/AddNewPublic';
+import './Layout.css'
 
-const { Header, Content, Footer, Sider} = Layout;
+const { Header, Content, Sider} = Layout;
 
 const cookies = new Cookies();
 
@@ -78,8 +81,20 @@ class Menu1 extends Component {
                 {
                   validarLogin() && <Menu.Item key="1" icon={<PicRightOutlined />}><NavLink to='/publications'>Publicaciones</NavLink></Menu.Item>
                 }
-                
+                {
+                  validarLogin() && <Menu.Item key="2" icon={<AppstoreAddOutlined />}><NavLink to='/addNewPublic'>Agregar Nueva Publicación</NavLink></Menu.Item>
+                }
               </Menu>
+
+              <div>
+                  
+                  <br />
+                  {
+                    validarLogin() && <button class="btn-sesion" onClick={()=>this.cerrarSesion()}>Cerrar Sesión</button>
+                  }
+                  
+              </div>
+
             </Sider>}
 
             <Layout className="site-layout">
@@ -94,20 +109,11 @@ class Menu1 extends Component {
                     <Route path='/' element={<Login/>}/>
                     <Route path='/registrar' element={<Registrar/>}/>
                     <Route path='/perfil' element={<Perfil/>}/>
-                    <Route path='/publicSelect' element={<PublicSelect/>}/>
+                    <Route path='/publicSelect/:id' element={<PublicSelect/>}/>
+                    <Route path='/addNewPublic' element={<AddNewPublic/>}/>
                   </Routes>
                 </div>
               </Content>
-              <Footer style={{ textAlign: 'center' }}>
-                <div>
-                  
-                  <br />
-                  {
-                    validarLogin() && <button onClick={()=>this.cerrarSesion()}>Cerrar Sesión</button>
-                  }
-                  
-                </div>
-              </Footer>
             </Layout>
           </Layout>
         );

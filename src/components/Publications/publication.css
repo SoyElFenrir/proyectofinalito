@@ -1,0 +1,46 @@
+.title{
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.subtitle{
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 23px;
+  font-style: italic;
+}
+
+.texto{
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 18px;
+}
+
+.datos{
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 16px;
+}
+
+.menu-seleccion{
+  background-color: white;
+}
+
+.pie{
+  background-color: white;
+}
+
+.cuerpo{
+  background-color: white;
+  size: 100%;
+}

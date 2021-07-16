@@ -90,7 +90,7 @@ function Registrar(){
         <Col xs={22} sm={20} md={12} lg={10}>
 
           <Form name='formulario' initialValues={{recordar: true}}onFinish={formSuccess}onFinishFailed={formFailed}ref={formRef}{...formItemLayout}>
-            <Title style={{color:'slategrey',textAlign:'center', textSizeAdjust:'auto'}}>Complete los siguientes datos para la Registración</Title>
+            <Title style={{color:'black',textAlign:'center', textSizeAdjust:'auto'}}>Complete los siguientes datos para la Registración</Title>
             
             <Item label='Nombre' name='firstName' rules={[{required: true, message: 'Por favor ingrese el Nombre'}]}><Input /*onChange={this.handleChange}*//></Item>
             <Item label='Apellido' name='lastName' rules={[{required: true, message: 'Por favor ingrese el Apellido'}]}><Input /*onChange={this.handleChange}*//></Item>
