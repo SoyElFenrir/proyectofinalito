@@ -1,30 +1,25 @@
-import React, {createRef, useState} from 'react';
-import { Form, Input, Button, Col, Row, Radio, DatePicker, Select } from 'antd';
+import React, {createRef} from 'react';
+import { Form, Input, Button, Col, Row, Select } from 'antd';
 import { Typography } from 'antd';
 import 'antd/dist/antd.css';
 import 'moment/locale/es';
-import locale from 'antd/es/date-picker/locale/es_ES';
-import Cookies from 'universal-cookie';
 import axios from 'axios';
+import { message } from 'antd';
 
 const baseUrl="http://localhost:8085/api/ussers/";
-const cookies = new Cookies();
 
 const {Item} = Form;
 const {Password} = Input;
-const {Group} = Radio;
 const {Option} = Select;
 const {Title} = Typography;
 
 function Registrar(){
-
-  const [value, setValue] =useState(1);
  
   const formRef=createRef();
 
-  const formSuccess=(datos)=>{
+  const formSuccess = async (datos)=>{
     console.log('Formulario enviado exitosamente: ',datos);
-    axios({
+    await axios({
       method: 'post', 
       url: baseUrl,
       data: {
@@ -33,17 +28,15 @@ function Registrar(){
         "usserName":datos.usserName,
         "password":datos.password,
         "email":datos.email,
-        "phone":datos.selectCodigo + datos.phone
+        "phone":datos.phone
       }
     })
-  }
-  
-  const formFailed=(error)=>{
-    console.log('Error: ',error)
+    window.location.href='./';
+    message.success('Registrado con Éxito');
   }
 
-  const onChange=e=>{
-    setValue(e.target.value)
+  const formFailed=(error)=>{
+    console.log('Error: ',error)
   }
 
   const prefixSelector=(
@@ -92,18 +85,11 @@ function Registrar(){
           <Form name='formulario' initialValues={{recordar: true}}onFinish={formSuccess}onFinishFailed={formFailed}ref={formRef}{...formItemLayout}>
             <Title style={{color:'black',textAlign:'center', textSizeAdjust:'auto'}}>Complete los siguientes datos para la Registración</Title>
             
-            <Item label='Nombre' name='firstName' rules={[{required: true, message: 'Por favor ingrese el Nombre'}]}><Input /*onChange={this.handleChange}*//></Item>
-            <Item label='Apellido' name='lastName' rules={[{required: true, message: 'Por favor ingrese el Apellido'}]}><Input /*onChange={this.handleChange}*//></Item>
-            <Item label='Usuario' name='usserName' rules={[{required: true, message: 'Por favor ingrese el nombre de Usuario'}]}><Input /*onChange={this.handleChange}*//></Item>
-            <Item label='Contraseña' name='password' rules={[{required: true, message: 'Por favor ingrese la Contraseña'}]}><Password /*onChange={this.handleChange}*//></Item>
-            <Item label='Correo' name='email' rules={[{required: true, message: 'Por favor ingrese el Correo'}]}><Input /*onChange={this.handleChange}*//></Item>
-            {/*<Item label='Sexo' name='sexo' rules={[{required: true, message: 'Por favor ingrese el Correo'}]}>
-              <Group onChange={onChange} value={value} name='radiobutton' defaultValue={1}>
-                <Radio value={1}>Hombre</Radio>
-                <Radio value={2}>Mujer</Radio>
-              </Group>
-            </Item>
-  <Item label='Fecha de Nacimiento' name='fechaNacimiento' rules={[{required: true, message: 'Por favor ingrese la Fecha de Nacimiento'}]}><DatePicker style={{width: '100%'}} locale={locale}/></Item>*/}
+            <Item label='Nombre' name='firstName' rules={[{required: true, message: 'Por favor ingrese el Nombre'}]}><Input/></Item>
+            <Item label='Apellido' name='lastName' rules={[{required: true, message: 'Por favor ingrese el Apellido'}]}><Input/></Item>
+            <Item label='Usuario' name='usserName' rules={[{required: true, message: 'Por favor ingrese el nombre de Usuario'}]}><Input/></Item>
+            <Item label='Contraseña' name='password' rules={[{required: true, message: 'Por favor ingrese la Contraseña'}]}><Password/></Item>
+            <Item label='Correo' name='email' rules={[{required: true, message: 'Por favor ingrese el Correo'}]}><Input/></Item>
             <Item label='Número de Teléfono' name='phone'><Input addonBefore={prefixSelector} style={{width: '100%'}} maxLength={10}/></Item>
 
             <Item style={{textAlign: 'center'}}>

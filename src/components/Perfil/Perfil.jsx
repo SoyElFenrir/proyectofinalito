@@ -16,6 +16,10 @@ const {Password} = Input;
 const {Option} = Select;
 const {Title} = Typography;
 
+
+
+
+
 function activarGrabado(){
   document.getElementById('ocultar').disabled = false
 }
@@ -38,7 +42,7 @@ function armarJson(primerNombre, apellido, usuario, clave, correo, numero){
 }
 
 function grabar(){
- 
+
   const formRef=createRef();
 
   const validandoDatos = (datos) => {
@@ -115,12 +119,8 @@ function grabar(){
     cookies.remove('usserName', {path: '/'});
     cookies.remove('password', {path: '/'});
     cookies.remove('email', {path: '/'});
-    /*cookies.remove('sexo', {path: '/'});
-    cookies.remove('dateNac', {path: '/'});*/
     cookies.remove('address', {path: '/'});
     cookies.remove('phone', {path: '/'});
-    
-    
 
     axios.delete(baseAxios2)
     window.location.href='./';

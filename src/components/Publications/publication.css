@@ -29,7 +29,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  font-size: 16px;
+  font-size: 16px;  
 }
 
 .menu-seleccion{
@@ -38,9 +38,24 @@
 
 .pie{
   background-color: white;
+  size: 100%;
 }
 
 .cuerpo{
   background-color: white;
   size: 100%;
+}
+
+.boton-modificar{
+  height: 65px;
+}
+/*
+.ant-btn{
+  margin-left: 90%;
+  height: 50px;
+}*/
+
+.colocar{
+  width: 25%;
+  margin-left: 75%;
 }

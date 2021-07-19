@@ -2,6 +2,17 @@ import React, {useEffect, useState} from 'react';
 import imgPublicacion from '../../images/publicacion.png'
 import axios from 'axios'
 import './publication.css'
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import {NavLink} from 'react-router-dom';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 const PublicSelect=()=>{
 
@@ -22,6 +33,19 @@ const PublicSelect=()=>{
   }, []
   )
 
+  const classes = useStyles();
+
+  const capturaDatos = () => {
+    localStorage.setItem('_id', publication._id)
+    localStorage.setItem('title', publication.title)
+    localStorage.setItem('subtitle', publication.subtitle)
+    localStorage.setItem('description', publication.description)
+    localStorage.setItem('author', publication.author)
+    localStorage.setItem('genre', publication.genre)
+
+    console.log('el titulo capturado es: ', localStorage.getItem('_id'))
+  }
+
   return (
     <body class="cuerpo">
       <header>
@@ -36,9 +60,25 @@ const PublicSelect=()=>{
           </div>
         </article>
       </main>
-      <footer>
-        <h4 class="datos">Autor: {publication.author}</h4>
-        <h4 class="datos">Género: {publication.genre}</h4>
+      <footer >
+        <div > 
+          <h4 class="datos">Autor: {publication.author}</h4>
+          <h4 class="datos">Género: {publication.genre}</h4>
+        </div>
+        {/*<div class="boton-modificar" className={classes.root}>
+          <Button class="datos" variant="outlined" color="primary">
+            Modificar Publicación
+          </Button>
+        </div>*/}
+        <div class="colocar">
+          <div className={classes.root}>
+            <Button variant="outlined" color="primary" onClick={capturaDatos}>
+              <NavLink to='/editPublic'>
+                Moficar Publicación
+              </NavLink>
+            </Button>
+          </div>
+        </div>
       </footer>
     </body>
   )

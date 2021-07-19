@@ -18,13 +18,6 @@ const  PublicPage = ()=>{
   }, []
   )
 
-
-  
-  const hiceClick=()=>{
-    alert(`Toco la Card ${publications}`)
-    console.log(`Toco la Card ${publications[0]._id}`)
-  }
-
   console.log('publicaciones', publications)
 
   return (

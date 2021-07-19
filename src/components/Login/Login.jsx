@@ -95,7 +95,8 @@ class Login extends Component{
               <Item style={{textAlign: 'center'}}>
                 <Button type='primary' htmlType='submit' onClick={()=> this.iniciarSesion()}>Iniciar Sesión</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button type='primary' htmlType='submit'><NavLink to='/registrar'>Registrarse</NavLink></Button>
+                <Button type="primary" htmlType='submit'><NavLink to='/registrar'>Registrarse</NavLink></Button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </Item>
             </Form>
 

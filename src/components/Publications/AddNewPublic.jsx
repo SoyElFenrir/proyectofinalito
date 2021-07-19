@@ -1,5 +1,5 @@
 import React, {createRef} from 'react';
-import { Form, Input, Button, Col, Row} from 'antd';
+import { Form, Button } from 'antd';
 import { Typography } from 'antd';
 import 'antd/dist/antd.css';
 import 'moment/locale/es';
@@ -97,7 +97,7 @@ function Registrar(){
             </Item>
 
             <Item style={{textAlign: 'center'}}>
-              <Button type='primary' htmlType='submit'>Registrar Usuario</Button>
+              <Button type='primary' htmlType='submit'>Grabar Publicación</Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <Button htmlType='submit' onClick={borrarCampos}>Borrar Campos</Button>
             </Item>

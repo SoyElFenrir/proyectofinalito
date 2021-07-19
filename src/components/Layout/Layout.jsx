@@ -15,11 +15,14 @@ import { Avatar } from 'antd';
 import Perfil from '../Perfil/Perfil';
 import PublicSelect from '../Publications/PublicSelect';
 import AddNewPublic from '../Publications/AddNewPublic';
+import EditPublic from '../Publications/EditPublic';
 import './Layout.css'
 
 const { Header, Content, Sider} = Layout;
 
 const cookies = new Cookies();
+
+
 
 class Menu1 extends Component {
 
@@ -30,8 +33,6 @@ class Menu1 extends Component {
       cookies.remove('usserName', {path: '/'});
       cookies.remove('password', {path: '/'});
       cookies.remove('email', {path: '/'});
-      /*cookies.remove('sexo', {path: '/'});
-      cookies.remove('dateNac', {path: '/'});*/
       cookies.remove('address', {path: '/'});
       cookies.remove('phone', {path: '/'});
       
@@ -58,7 +59,8 @@ class Menu1 extends Component {
           
           return (var_id === undefined) ? false : true
         }
-
+        
+        
         return (
           
           <Layout theme="Dark" style={{ minHeight: '100vh' }}>
@@ -105,12 +107,15 @@ class Menu1 extends Component {
               
                 <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                   <Routes>
-                    <Route path='/publications' element={<Publications/>}/>
+                    {
+                    validarLogin() && <Route path='/publications' element={<Publications/>}/>
+                    }
                     <Route path='/' element={<Login/>}/>
                     <Route path='/registrar' element={<Registrar/>}/>
                     <Route path='/perfil' element={<Perfil/>}/>
                     <Route path='/publicSelect/:id' element={<PublicSelect/>}/>
                     <Route path='/addNewPublic' element={<AddNewPublic/>}/>
+                    <Route path='/editPublic' element={<EditPublic/>}/>
                   </Routes>
                 </div>
               </Content>
